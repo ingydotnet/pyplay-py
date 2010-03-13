@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export PYTHONPATH=lib
+export PYTHONSTARTUP=bin/pythonstartup
+export SANDBOX_ARGV="$*"
+exec python

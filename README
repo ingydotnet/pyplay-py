@@ -1,0 +1,11 @@
+This is my Sandbox for learning Python and playing in the Python Shell.
+
+There is a script to start Python with tab completion, and basic modules
+loaded.
+
+When I have something to prove about the behavior of Python, I code it as a
+test in tests/.
+
+Links:
+
+* "Shell Tab Completion"<http://www.razorvine.net/blog/user/irmen/article/2004-11-22/17>

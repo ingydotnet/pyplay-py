@@ -2,8 +2,10 @@
 Sandbox module.
 """
 
+globals()['a'] = 1
 def options():
     import os
+    globals()['b'] = 2
 
     options = {
         'readline': True,
@@ -13,9 +15,11 @@ def options():
         're': True,
         'yaml': True,
     }
+    modules = []
 
     for option in os.environ['SANDBOX_ARGV'].split():
         if len(option) <= 2 or option[0:2] != '--':
+            modules.append(option)
             continue
         option = option[2:]
         value = True
@@ -33,4 +37,4 @@ def options():
         if options['readline2']:
             options['readline'] = False
 
-    return options
+    return (options, modules)

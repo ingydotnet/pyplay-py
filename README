@@ -7,6 +7,7 @@ basic modules loaded.
     ./python-sandbox --none         # Start up with no extras
     ./python-sandbox --no-yaml      # Start up with all except yaml
     ./python-sandbox --none --yaml  # Start up with nothing except yaml
+    ./python-sandbox xyz test_foo   # Start up then import xyz and test_foo
 
 When I have something to prove about the behavior of Python, I code it as a
 test in tests/.

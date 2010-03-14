@@ -4,7 +4,11 @@ This ...
 
 import sandbox
 
-options = sandbox.options()
+(options, modules) = sandbox.options()
+for module in modules:
+    globals()[module] = __import__(module)
+    print globals()['regexp_comment']
+    print 'globals()[%(module)s] = __import__(%(module)s)' % locals()
 
 if options['readline']:
     import sandbox.rl

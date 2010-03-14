@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PYTHONSTARTUP=lib/playground.py
+export PYTHON_SANDBOX_ARGV="$*"
+exec python

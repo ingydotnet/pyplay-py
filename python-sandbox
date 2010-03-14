@@ -1,6 +1,0 @@
-#!/bin/sh
-
-export PYTHONPATH=lib:tests
-export PYTHONSTARTUP=bin/pythonstartup
-export SANDBOX_ARGV="$*"
-exec python

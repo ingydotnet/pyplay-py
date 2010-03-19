@@ -1,7 +1,10 @@
 default:
+	@echo 'No default action for make'
 
-test:
-	@echo '"make tests" not supported yet :-('
+build test install sdist clean::
+	python setup.py $@
 
-clean:
+clean::
 	find . -name *.pyc | xargs rm
+	rm -fr build dist
+

@@ -1,19 +1,21 @@
-This is my Sandbox for learning Python and playing in the Python Shell.
+== Installation
 
-There is a script to start Python with readline tab completion, and
-basic modules loaded.
+sudo python setup.py install
 
-    ./python-sandbox                # Start Python and handy module
-    ./python-sandbox --none         # Start up with no extras
-    ./python-sandbox --no-yaml      # Start up with all except yaml
-    ./python-sandbox --none --yaml  # Start up with nothing except yaml
-    ./python-sandbox xyz test_foo   # Start up then import xyz and test_foo
+== Description
 
-When I have something to prove about the behavior of Python, I code it as a
-test in tests/.
+python-playground is a tool for invoking the interactive python shell, but
+with tab completion turned on and some modules preloaded.
 
-    make tests          # Run all the tests
+    python-playground               # Start Python and handy modules
+    python-playground --none        # Start up with no extras
+    python-playground -yaml         # Start up with all except yaml
+    python-playground --none yaml   # Start up with nothing except yaml
+    python-playground xyz test_foo  # Start up then import xyz and test_foo
 
-Links:
+You can copy the included sample-config.yaml to ~/.python-playground/config.yaml
+and set up your own custom configuration.
 
-* "Shell Tab Completion"<http://www.razorvine.net/blog/user/irmen/article/2004-11-22/17>
+== Links
+
+* http://www.razorvine.net/blog/user/irmen/article/2004-11-22/17

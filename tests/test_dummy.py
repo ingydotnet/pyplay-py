@@ -1,1 +1,0 @@
-assert True, 'always true'

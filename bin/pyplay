@@ -1,0 +1,14 @@
+#!/bin/sh
+
+path="./pyplay.py"
+if [ ! -f $path ]; then
+    path=`python -c 'from distutils.sysconfig import get_python_lib; print get_python_lib()'`"/pyplay.py"
+    if [ ! -f $path ]; then
+        echo "Can't find pyplay.py"
+        exit 1
+    fi
+fi
+
+export PYTHONSTARTUP="$path"
+export PYTHON_SANDBOX_ARGV="$*"
+exec python

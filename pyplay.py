@@ -1,12 +1,12 @@
 """\
-python.playground module.
+The ``pyplay.py`` module supports the ``pyplay.py`` command line utility.
 """
 
 __version__ = '0.1'
 
 import os
 
-class Playground():
+class PyPlay():
     config = {
         'pythonpath': [
             '.',
@@ -21,7 +21,7 @@ class Playground():
     }
 
     def __init__(self):
-        config_path = os.path.expanduser('~/.python-playground/config.yaml')
+        config_path = os.path.expanduser('~/.pyplay/config.yaml')
         if os.path.exists(config_path):
             import yaml
             config = yaml.load(file(config_path, 'r'))
@@ -110,7 +110,7 @@ class Playground():
         del historyTmp, endMarkerStr, saveMacro
 
 if __name__ == '__main__':
-    pg = Playground()
+    pg = PyPlay()
 
     import sys
     sys.path.extend(pg.config['pythonpath'])

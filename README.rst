@@ -80,6 +80,3 @@ In a future release, you might see:
 * pyplay special commands
 * A plugin facility
 
-----
-
-..

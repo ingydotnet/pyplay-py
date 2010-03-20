@@ -2,7 +2,7 @@
 The ``pyplay.py`` module supports the ``pyplay`` command line utility.
 """
 
-__version__ = '0.3'
+__version__ = '0.4'
 
 import os
 import sys
@@ -26,10 +26,9 @@ class PyPlay():
                 module = option
                 modules.append(module)
 
-        self.commands = self.config.commands
         for module in modules.__reversed__():
             command = "import %s" % module
-            self.commands.insert(0, command)
+            self.config.commands.insert(0, command)
 
     def set_pythonpath(self):
         if self.config.ENV_CONFIG_DIR != '':
@@ -100,6 +99,9 @@ class PyPlay():
 
     def help(self):
         version = __version__
+        dir = self.config.ENV_CONFIG_DIR
+        if dir is None:
+            dir = 'None'
         config = (
             self.config.CONFIG_FILE or
             'None found. See PyPlay documentation.'
@@ -107,10 +109,12 @@ class PyPlay():
         return """
 Welcome to PyPlay version %(version)s.
 
-Config file:    %(config)s
+PYPATH_CONFIG_DIR:  %(dir)s
+Config file:        %(config)s
 Commands:
     * h()           -- Help screen.
     * y(...)        -- Print a YAML dump of any object.
+                       For example, try: y(__builtins__.__dict__)
 
 Tips and Tricks:
     * Use the tab key to complete a word or see what options are
@@ -161,6 +165,17 @@ class Config():
 
 
 if __name__ == '__main__':
+    def h():
+        print pyplay.help()
+
+    def y(object):
+        import yaml
+        print yaml.dump(
+            object,
+            default_flow_style=False,
+            explicit_start=True
+        ),
+
     pyplay = PyPlay()
 
     pyplay.set_pythonpath()
@@ -175,17 +190,8 @@ if __name__ == '__main__':
         print '*** PyPlay tab completion enabled'
         pyplay.init_readline()
 
-    for command in pyplay.commands:
+    for command in pyplay.config.commands:
         print '>>> %s' % command
         exec command
 
-    def h():
-        print pyplay.help()
-
-    def y(object):
-        import yaml
-        print yaml.dump(
-            object,
-            default_flow_style=False,
-            explicit_start=True
-        ),
+    del command

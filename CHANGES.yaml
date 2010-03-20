@@ -1,4 +1,10 @@
 ---
+- version: 0.4
+  date:    Sat Mar 20 16:26:36 PDT 2010
+  changes:
+  - Allow h() in config commands
+  - Put more info in h() output
+  - del extraneous locals
 - version: 0.3
   date:    Sat Mar 20 13:06:10 PDT 2010
   changes:

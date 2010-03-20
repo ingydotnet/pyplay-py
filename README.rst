@@ -68,7 +68,7 @@ time I use it, B) and that it doesn't have tab completion on by default.
 you find it useful. Please email me if you have any problems or
 suggestions.
 
-Kind regards, Ingy döt Net
+Kind regards, Ingy dot Net
 
 To Do
 -----

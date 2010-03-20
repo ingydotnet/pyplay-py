@@ -79,7 +79,3 @@ In a future release, you might see:
 * Save readline history between sessions
 * pyplay special commands
 * A plugin facility
-
-----------
- 
-..

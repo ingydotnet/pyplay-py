@@ -2,73 +2,47 @@
 The ``pyplay.py`` module supports the ``pyplay`` command line utility.
 """
 
-__version__ = '0.2'
+__version__ = '0.3'
 
 import os
 import sys
 
+
 class PyPlay():
-    config = {
-        'pythonpath': [
-            '.',
-            'lib',
-        ],
-        'import': [
-            'os',
-            'sys',
-            're',
-        ],
-        'commands': [],
-        'readline': True,
-    }
-
     def __init__(self):
-        config_path = './pyplay/config.yaml'
-        if not os.path.exists(config_path):
-            config_path = os.path.expanduser('~/.pyplay/config.yaml')
-            if not os.path.exists(config_path):
-                config_path = ''
+        self.config = Config()
 
-        if config_path:
-            import yaml
-            config = yaml.load(file(config_path, 'r'))
-            if 'import' in config:
-                self.config['import'] = config['import']
-            if 'pythonpath' in config:
-                self.config['pythonpath'] = config['pythonpath']
-            if 'readline' in config:
-                self.config['readline'] = config['readline']
-            if 'commands' in config:
-                self.config['commands'] = config['commands']
-
-        path = os.path.expanduser('~/.pyplay')
-        if os.path.exists(path):
-            sys.path.insert(0, path)
-        path = './pyplay'
-        if os.path.exists(path):
-            sys.path.insert(0, path)
-
-        for path in self.config['pythonpath'].__reversed__():
-            sys.path.insert(0, path)
-    
-    def parse_options(self):
-        self.modules = self.config['import']
-        for option in os.environ['PYTHON_SANDBOX_ARGV'].split():
+        modules = self.config.import_
+        for option in os.environ['_PYPLAY_ARGV'].split():
             if option == '--none':
-                self.modules = []
-            elif len(option) > 1 and option[0:1] == '-':
+                modules = []
+            elif option.startswith('-'):
                 module = option[1:]
                 try:
-                    self.modules.remove(module)
+                    modules.remove(module)
                 except ValueError:
                     pass
             else:
                 module = option
-                self.modules.append(module)
+                modules.append(module)
 
-        for module in self.modules.__reversed__():
+        self.commands = self.config.commands
+        for module in modules.__reversed__():
             command = "import %s" % module
-            self.config['commands'].insert(0, command)
+            self.commands.insert(0, command)
+
+    def set_pythonpath(self):
+        if self.config.ENV_CONFIG_DIR != '':
+            for dir in (
+                self.config.HOME_CONFIG_DIR,
+                self.config.LOCAL_CONFIG_DIR,
+                self.config.ENV_CONFIG_DIR,
+            ):
+                if dir is not None:
+                    sys.path.insert(0, dir)
+
+        for path in self.config.pythonpath.__reversed__():
+            sys.path.insert(0, path)
 
     def init_readline(self):
         try:
@@ -124,16 +98,94 @@ class PyPlay():
         del os, atexit, readline, rlcompleter, save_history, historyPath
         del historyTmp, endMarkerStr, saveMacro
 
+    def help(self):
+        version = __version__
+        config = (
+            self.config.CONFIG_FILE or
+            'None found. See PyPlay documentation.'
+        )
+        return """
+Welcome to PyPlay version %(version)s.
+
+Config file:    %(config)s
+Commands:
+    * h()           -- Help screen.
+    * y(...)        -- Print a YAML dump of any object.
+
+Tips and Tricks:
+    * Use the tab key to complete a word or see what options are
+      available in any given context.
+    * Use <ctl>-L to clear the screen.
+""" % locals()
+
+
+class Config():
+    dir = os.path.expanduser('~/.pyplay')
+    HOME_CONFIG_DIR = os.path.exists(dir) and dir or None
+
+    dir = './pyplay'
+    LOCAL_CONFIG_DIR = os.path.exists(dir) and dir or None
+
+    try:
+        dir = os.environ['PYPLAY_CONFIG_DIR']
+    except KeyError:
+        dir = None
+    if not dir:
+        ENV_CONFIG_DIR = dir
+    else:
+        ENV_CONFIG_DIR = os.path.exists(dir) and dir or None
+
+    dir = ENV_CONFIG_DIR or LOCAL_CONFIG_DIR or HOME_CONFIG_DIR
+    file = dir + '/config.yaml'
+    if ENV_CONFIG_DIR == '':
+        CONFIG_FILE = None
+    else:
+        CONFIG_FILE = dir and os.path.exists(file) and file or None
+
+    def __init__(self):
+        self.readline = True
+        self.commands = []
+        self.pythonpath = [
+            'lib',
+        ]
+        self.import_ = [
+            'os',
+            'sys',
+            're',
+        ]
+
+        if self.CONFIG_FILE:
+            import yaml
+            config = yaml.load(file(self.CONFIG_FILE, 'r'))
+            self.__dict__.update(config)
+
+
 if __name__ == '__main__':
     pyplay = PyPlay()
 
-    pyplay.parse_options()
+    pyplay.set_pythonpath()
 
-    if pyplay.config['readline']:
-        print '*** Tab completion enabled'
+    print '*** Welcome to PyPlay version %s -- Type h() for help.' % (
+        __version__,)
+
+    if pyplay.config.CONFIG_FILE:
+        print "*** PyPlay config file: '%s'" % pyplay.config.CONFIG_FILE
+
+    if pyplay.config.readline:
+        print '*** PyPlay tab completion enabled'
         pyplay.init_readline()
 
-    for command in pyplay.config['commands']:
+    for command in pyplay.commands:
         print '>>> %s' % command
         exec command
 
+    def h():
+        print pyplay.help()
+
+    def y(object):
+        import yaml
+        print yaml.dump(
+            object,
+            default_flow_style=False,
+            explicit_start=True
+        ),

@@ -2,8 +2,9 @@ About
 -----
 
 ``pyplay`` is a command line tool that invokes the interactive Python
-shell, but it starts up with tab completion turned on, some common
-modules preloaded and optionally some startup python commands run.
+shell, but starts it up with tab completion turned on, common paths
+added to ``sys.path``, common modules preloaded and optionally some
+startup python commands run.
 
 It is configurable, both at a system-wide level and a per project
 (directory) level.
@@ -51,9 +52,55 @@ you can set up your own custom configuration in a file called
     # Commands to run by default
     - from yaml import *
 
-Also, ``~/.pyplay/`` and ``./pyplay/`` will be added to the front of
-``sys.path`` if they exist, so you can put modules there, that you want
-to play with.
+If you explicitly supply the ``PYPLAY_CONFIG_DIR`` environment variable,
+that directory will be used to find the ``config.yaml`` file. If you set
+``PYPLAY_CONFIG_DIR`` to an empty string, no config file will be read,
+even if the one of them exists.
+
+Also, ``PYPLAY_CONFIG_DIR``, ``~/.pyplay/`` and ``./pyplay/`` will be
+added to the front of ``sys.path`` if they exist, so you can put modules
+that you want to play with in those directories.
+
+Command Line Options
+--------------------
+
+``--none``
+    Clear the list of modules to import
+
+``module``
+    Add a module to the import list
+
+``-module``
+    Remove a module from the import list
+
+Sample Run
+----------
+
+Here is what a session looks like on startup::
+
+    $ pyplay foo bar
+    Python 2.6.2 (r262:71600, Apr 16 2009, 09:17:39) 
+    [GCC 4.0.1 (Apple Computer, Inc. build 5250)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    *** Welcome to PyPlay version 0.3 -- Type h() for help.
+    *** PyPlay tab completion enabled
+    >>> import os
+    >>> import sys
+    >>> import re
+    >>> import foo
+    >>> import bar
+    >>> 
+
+PyPlay Commands
+---------------
+
+Pyplay adds some extra shell commands. The current commands are:
+
+h()
+    Show the PyPlay help screen.
+
+y(object)
+    Print a YAML dump of any object. (Requires the ``yaml`` module)
 
 From the Author
 ---------------
@@ -77,6 +124,4 @@ In a future release, you might see:
 
 * Logging of shell commands
 * Save readline history between sessions
-* pyplay special commands
-* A plugin facility
-
+* More PyPlay special commands

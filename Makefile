@@ -6,7 +6,7 @@ default:
 build test install register sdist clean::
 	python setup.py $@
 
-upload: clean
+upload:: clean register
 	python setup.py sdist $@
 
 clean::

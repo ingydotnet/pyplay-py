@@ -1,4 +1,12 @@
 ---
+- version: 0.3
+  date:    Sat Mar 20 13:06:10 PDT 2010
+  changes:
+  - Refactored code to be more Pythonic
+  - Support PYYAML_CONFIG_DIR environment variable
+  - Print more useful info at startup
+  - Added help screen
+  - Added h() and y() commands
 - version: 0.2
   date:    Fri Mar 19 16:00:07 PDT 2010
   changes: Used a MANIFEST.in

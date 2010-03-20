@@ -38,9 +38,9 @@ setup(
         'Topic :: Utilities',
     ],
 
-    author=u'Ingy döt Net',
+    author='Ingy dot Net',
     author_email='ingy@ingy.net',
-    license='bsd',
+    license='Simplified BSD License',
     url='http://github.com/ingydotnet/pyplay-py/',
 
     py_modules=['pyplay'],

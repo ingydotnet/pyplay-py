@@ -11,6 +11,6 @@ if not os.path.exists(path):
         raise Exception("Can't find pyplay.py")
 
 os.environ['PYTHONSTARTUP'] = path
-os.environ['PYTHON_SANDBOX_ARGV'] = ' '.join(sys.argv[1:])
+os.environ['_PYPLAY_ARGV'] = ' '.join(sys.argv[1:])
 
 os.execv(sys.executable, [])

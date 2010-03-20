@@ -1,9 +1,14 @@
+.PHONY: default build test install register sdist clean upload
+
 default:
 	@echo 'No default action for make'
 
-build test install register sdist upload clean::
+build test install register sdist clean::
 	python setup.py $@
+
+upload: clean
+	python setup.py sdist $@
 
 clean::
 	find . -name '*.pyc' | xargs rm
-	rm -fr build dist
+	rm -fr build dist MANIFEST

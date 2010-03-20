@@ -1,10 +1,11 @@
 """\
-The ``pyplay.py`` module supports the ``pyplay.py`` command line utility.
+The ``pyplay.py`` module supports the ``pyplay`` command line utility.
 """
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 import os
+import sys
 
 class PyPlay():
     config = {
@@ -17,12 +18,18 @@ class PyPlay():
             'sys',
             're',
         ],
+        'commands': [],
         'readline': True,
     }
 
     def __init__(self):
-        config_path = os.path.expanduser('~/.pyplay/config.yaml')
-        if os.path.exists(config_path):
+        config_path = './pyplay/config.yaml'
+        if not os.path.exists(config_path):
+            config_path = os.path.expanduser('~/.pyplay/config.yaml')
+            if not os.path.exists(config_path):
+                config_path = ''
+
+        if config_path:
             import yaml
             config = yaml.load(file(config_path, 'r'))
             if 'import' in config:
@@ -31,15 +38,19 @@ class PyPlay():
                 self.config['pythonpath'] = config['pythonpath']
             if 'readline' in config:
                 self.config['readline'] = config['readline']
-    
-    def commands(self):
-        self.parse_options()
-        list = []
-        for module in self.modules:
-            command = "import %s" % module
-            list.append(command)
-        return list
+            if 'commands' in config:
+                self.config['commands'] = config['commands']
 
+        path = os.path.expanduser('~/.pyplay')
+        if os.path.exists(path):
+            sys.path.insert(0, path)
+        path = './pyplay'
+        if os.path.exists(path):
+            sys.path.insert(0, path)
+
+        for path in self.config['pythonpath'].__reversed__():
+            sys.path.insert(0, path)
+    
     def parse_options(self):
         self.modules = self.config['import']
         for option in os.environ['PYTHON_SANDBOX_ARGV'].split():
@@ -54,6 +65,10 @@ class PyPlay():
             else:
                 module = option
                 self.modules.append(module)
+
+        for module in self.modules.__reversed__():
+            command = "import %s" % module
+            self.config['commands'].insert(0, command)
 
     def init_readline(self):
         try:
@@ -110,15 +125,15 @@ class PyPlay():
         del historyTmp, endMarkerStr, saveMacro
 
 if __name__ == '__main__':
-    pg = PyPlay()
+    pyplay = PyPlay()
 
-    import sys
-    sys.path.extend(pg.config['pythonpath'])
+    pyplay.parse_options()
 
-    for command in pg.commands():
+    if pyplay.config['readline']:
+        print '*** Tab completion enabled'
+        pyplay.init_readline()
+
+    for command in pyplay.config['commands']:
         print '>>> %s' % command
         exec command
-
-    if pg.config['readline']:
-        pg.init_readline()
 

@@ -26,7 +26,7 @@ class PyPlay():
                 module = option
                 modules.append(module)
 
-        for module in modules.__reversed__():
+        for module in reversed(modules):
             command = "import %s" % module
             self.config.commands.insert(0, command)
 
@@ -40,7 +40,7 @@ class PyPlay():
                 if dir is not None:
                     sys.path.insert(0, dir)
 
-        for path in self.config.pythonpath.__reversed__():
+        for path in reversed(self.config.pythonpath):
             sys.path.insert(0, path)
 
     def init_readline(self):
@@ -125,26 +125,20 @@ Tips and Tricks:
 
 class Config():
     dir = os.path.expanduser('~/.pyplay')
-    HOME_CONFIG_DIR = os.path.exists(dir) and dir or None
+    HOME_CONFIG_DIR = dir if os.path.exists(dir) else None
 
     dir = './pyplay'
-    LOCAL_CONFIG_DIR = os.path.exists(dir) and dir or None
+    LOCAL_CONFIG_DIR = dir if os.path.exists(dir) else None
 
-    try:
-        dir = os.environ['PYPLAY_CONFIG_DIR']
-    except KeyError:
-        dir = None
-    if not dir:
-        ENV_CONFIG_DIR = dir
-    else:
-        ENV_CONFIG_DIR = os.path.exists(dir) and dir or None
+    dir = os.environ.get('PYPLAY_CONFIG_DIR', None)
+    ENV_CONFIG_DIR = dir if (not dir or os.path.exists(dir)) else None
 
     dir = ENV_CONFIG_DIR or LOCAL_CONFIG_DIR or HOME_CONFIG_DIR
     file = dir + '/config.yaml'
     if ENV_CONFIG_DIR == '':
         CONFIG_FILE = None
     else:
-        CONFIG_FILE = dir and os.path.exists(file) and file or None
+        CONFIG_FILE = file if (dir and os.path.exists(file)) else None
 
     def __init__(self):
         self.readline = True

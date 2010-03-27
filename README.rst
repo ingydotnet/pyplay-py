@@ -44,7 +44,7 @@ you can set up your own custom configuration in a file called
     - tests
     
     # Modules to import by default.
-    import:
+    modules:
     - os
     - sys
     - yaml

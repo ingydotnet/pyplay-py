@@ -2,7 +2,7 @@
 The ``pyplay.py`` module supports the ``pyplay`` command line utility.
 """
 
-__version__ = '0.4'
+__version__ = '0.6'
 
 import os
 import sys
@@ -12,7 +12,7 @@ class PyPlay():
     def __init__(self):
         self.config = Config()
 
-        modules = self.config.import_
+        modules = self.config.modules
         for option in os.environ['_PYPLAY_ARGV'].split():
             if option == '--none':
                 modules = []
@@ -146,7 +146,7 @@ class Config():
         self.pythonpath = [
             'lib',
         ]
-        self.import_ = [
+        self.modules = [
             'os',
             'sys',
             're',

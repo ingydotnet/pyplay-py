@@ -1,7 +1,6 @@
 .PHONY: default build test install register sdist clean upload
 
-default:
-	@echo 'No default action for make'
+all: build
 
 build test install register sdist clean::
 	python setup.py $@

@@ -1,10 +1,9 @@
-import sys
-import pyplay
+import unittest
 
-def main():
-    assert pyplay, "pyplay was loaded successfully"
-    # Failing test
-    # assert False, " O no"
+class TestImport(unittest.TestCase):
+    def test_compiled(self):
+        import pyplay
+        self.assertTrue(pyplay, "pyplay was loaded successfully")
 
 if __name__ == '__main__':
-    main()
+    unittest.main()

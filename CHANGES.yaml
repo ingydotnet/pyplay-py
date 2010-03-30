@@ -1,4 +1,10 @@
 ---
+- version: 0.7
+  date:    Mon Mar 29 19:01:14 PDT 2010
+  changes:
+  - Switch test framework to unittest
+  - Got `make test` and `python setup.py test` working.
+---
 - version: 0.6
   date:    Fri Mar 26 22:15:08 PDT 2010
   changes:

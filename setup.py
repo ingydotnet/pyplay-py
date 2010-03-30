@@ -3,9 +3,8 @@
 
 import os
 import sys
-sys.path.insert(0, 'lib')
-sys.path.insert(0, '.')
 import codecs
+import glob
 
 from distutils.core import setup, Command
 
@@ -26,9 +25,11 @@ class Test(Command):
         build_cmd.run()
         sys.path.insert(0, build_cmd.build_lib)
         sys.path.insert(0, 'tests')
-        import test_compiled
-        test_compiled.main()
 
+        for test in glob.glob('tests/*.py'):
+            name = test[test.index('/') + 1: test.rindex('.')]
+            module = __import__(name)
+            module.unittest.main(argv=[''])
 
 if __name__ == '__main__':
     setup(

@@ -1,4 +1,10 @@
 ---
+- version: 0.8
+  date:    Mon Mar 29 19:58:31 PDT 2010
+  changes:
+  - Actually run the tests now. `make test` was running 0 tests!
+  - Override sys.exit to get past unittest exiting.
+---
 - version: 0.7
   date:    Mon Mar 29 19:01:14 PDT 2010
   changes:

@@ -26,10 +26,16 @@ class Test(Command):
         sys.path.insert(0, build_cmd.build_lib)
         sys.path.insert(0, 'tests')
 
+        # unittest is evil (calls exit), so we add more evil.
+        def exit(code):
+            pass
+        sys.exit = exit
+
         for test in glob.glob('tests/*.py'):
             name = test[test.index('/') + 1: test.rindex('.')]
             module = __import__(name)
-            module.unittest.main(argv=[''])
+            module.unittest.main(module=module, argv=[''])
+
 
 if __name__ == '__main__':
     setup(
@@ -60,7 +66,7 @@ if __name__ == '__main__':
             'Topic :: Utilities',
         ],
 
-        author='Ingy dot Net',
+        author='Ingy dot Net', # XXX need to find how to do utf-8 here :\
         author_email='ingy@ingy.net',
         license='Simplified BSD License',
         url='http://github.com/ingydotnet/pyplay-py/',

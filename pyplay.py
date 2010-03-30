@@ -2,7 +2,7 @@
 The ``pyplay.py`` module supports the ``pyplay`` command line utility.
 """
 
-__version__ = '0.7'
+__version__ = '0.8'
 
 import os
 import sys

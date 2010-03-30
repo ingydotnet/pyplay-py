@@ -1,12 +1,9 @@
-"""\
-The ``pyplay.py`` module supports the ``pyplay`` command line utility.
-"""
+"""Welcome to pyplay. Type h() for help."""
 
-__version__ = '0.8'
+__version__ = '0.9'
 
 import os
 import sys
-
 
 class PyPlay():
     def __init__(self):
@@ -52,8 +49,8 @@ class PyPlay():
             import rlcompleter
             readline.parse_and_bind("tab: complete")
 
-    def help(self):
-        version = __version__
+    def help(self, vars):
+        locals().update(vars)
         dir = self.config.ENV_CONFIG_DIR
         if dir is None:
             dir = 'None'
@@ -78,8 +75,11 @@ Tips and Tricks:
 """ % locals()
 
     def main(self):
+        version = __version__
+        l = locals()
+
         def h():
-            print pyplay.help()
+            print pyplay.help(l)
 
         def y(object):
             import yaml
@@ -104,6 +104,11 @@ Tips and Tricks:
         if pyplay.config.readline:
             print '*** PyPlay tab completion enabled'
             pyplay.init_readline()
+
+        del globals()['os']
+        del globals()['sys']
+        del globals()['__version__']
+        del globals()['PyPlay']
 
         for command in pyplay.config.commands:
             print '>>> %s' % command

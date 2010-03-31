@@ -1,4 +1,9 @@
 ---
+- version: 0.10
+  date:    Wed Mar 31 15:21:01 PDT 2010
+  changes:
+  - ZOMG! Didn't work when no config dir. I SUCK! I NEED TESTS!!!
+---
 - version: 0.9
   date:    Tue Mar 30 14:50:48 PDT 2010
   changes:

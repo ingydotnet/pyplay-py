@@ -1,6 +1,6 @@
 """Welcome to pyplay. Type h() for help."""
 
-__version__ = '0.9'
+__version__ = '0.10'
 
 import os
 import sys
@@ -125,7 +125,7 @@ Tips and Tricks:
         ENV_CONFIG_DIR = dir if (not dir or os.path.exists(dir)) else None
 
         dir = ENV_CONFIG_DIR or LOCAL_CONFIG_DIR or HOME_CONFIG_DIR
-        file = dir + '/config.yaml'
+        file = dir + '/config.yaml' if dir else None
         if ENV_CONFIG_DIR == '':
             CONFIG_FILE = None
         else:

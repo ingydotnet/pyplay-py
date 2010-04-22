@@ -1,4 +1,9 @@
 ---
+- version: 1.0.1
+  date:    Thu Apr 22 08:29:57 PDT 2010
+  changes:
+  - package-py changes
+---
 - version: 1.0.0
   date:    Thu Apr 22 07:42:19 PDT 2010
   changes:

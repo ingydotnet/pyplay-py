@@ -20,6 +20,6 @@ def get():
   'packages': [],
   'scripts': ['bin/pyplay'],
   'url': 'http://github.com/ingydotnet/pyplay-py/',
-  'version': '1.0.0'}
+  'version': '1.0.1'}
 )
     return dict

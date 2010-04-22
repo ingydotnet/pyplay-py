@@ -5,7 +5,7 @@ package package package
 import os, sys, glob
 from distutils.core import Command
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 has_setuptools = False
 
@@ -40,7 +40,7 @@ class setup():
         return args
 
     def check_args(self, args):
-        if args.get('install_requires'):
+        if args.get('install_requires') and 'install' in sys.argv:
             if not has_setuptools:
                 die(ENOSETUPTOOLS)
 

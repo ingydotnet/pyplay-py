@@ -1,4 +1,9 @@
 ---
+- version: 1.0.3
+  date:    Thu Apr 22 09:55:36 PDT 2010
+  changes:
+  - Needed py-modules info keyword.
+---
 - version: 1.0.2
   date:    Thu Apr 22 09:31:58 PDT 2010
   changes:

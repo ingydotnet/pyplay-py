@@ -1,4 +1,9 @@
 ---
+- version: 1.0.2
+  date:    Thu Apr 22 09:31:58 PDT 2010
+  changes:
+  - Use package.unittest
+---
 - version: 1.0.1
   date:    Thu Apr 22 08:29:57 PDT 2010
   changes:

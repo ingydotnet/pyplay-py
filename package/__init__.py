@@ -67,7 +67,7 @@ class Test(Command):
         for test in glob.glob(self.test_dir + '/*.py'):
             name = test[test.index('/') + 1: test.rindex('.')]
             module = __import__(name)
-            module.cdent.test.main(module=module, argv=[''])
+            module.main(module=module, argv=[''])
 
 class DevTest(Test):
     test_dir = 'dev-tests'

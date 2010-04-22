@@ -1,4 +1,9 @@
 ---
+- version: 1.0.0
+  date:    Thu Apr 22 07:42:19 PDT 2010
+  changes:
+  - Use package-py for setup.
+---
 - version: 0.9
   date:    Tue Mar 30 14:50:48 PDT 2010
   changes:

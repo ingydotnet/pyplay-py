@@ -1,11 +1,11 @@
 """\
-package package package
+package - The Python package package package
 """
 
 import os, sys, glob
 from distutils.core import Command
 
-__version__ = '0.0.4'
+__version__ = '0.0.9'
 
 has_setuptools = False
 

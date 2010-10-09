@@ -13,4 +13,4 @@ if not os.path.exists(path):
 os.environ['PYTHONSTARTUP'] = path
 os.environ['_PYPLAY_ARGV'] = ' '.join(sys.argv[1:])
 
-os.execv(sys.executable, [])
+os.execv(sys.executable, [''])

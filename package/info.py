@@ -17,6 +17,6 @@ def get():
   'py_modules': ['pyplay'],
   'scripts': ['bin/pyplay'],
   'url': 'http://github.com/ingydotnet/pyplay-py/',
-  'version': '1.0.3'}
+  'version': '1.0.4'}
 )
     return info

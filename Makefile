@@ -39,6 +39,7 @@
     register \
     sdist \
     clean \
+    purge \
     upload \
  
 
@@ -49,7 +50,7 @@ PACKAGE_BASE = ../package-py
 PYTHON = python
 
 
-YOUR_PACKAGE = your-package/__init__.py
+YOUR_PACKAGE = yourpackage/__init__.py
 
 LAYOUT_FILES = \
 	setup.py \
@@ -123,7 +124,7 @@ upgrade:: _upgrade $(UPGRADE_TARGETS) _fixup info
 
 _upgrade::
 	@if [ -e "Makefile.mk" ]; then echo "Don't `make upgrade` here!!!"; exit 1; fi
-	@if [ "$(MAKEFILE_LIST:%=%)" == "Makefile" ]; then echo 'run instead: make -f $(PACKAGE_BASE)/Makefile.mk upgrade'; exit 1; fi
+	@if [ "$(MAKEFILE_LIST:%=%)" = "Makefile" ]; then echo 'run instead: make -f $(PACKAGE_BASE)/Makefile.mk upgrade'; exit 1; fi
 
 _fixup::
 	$(PYTHON) $(PACKAGE_BASE)/bin/fix_makefile.py "$(PACKAGE_BASE)"
@@ -135,7 +136,7 @@ Makefile::
 	cp $(PACKAGE_BASE)/$@.mk $@
 
 $(YOUR_PACKAGE)::
-	mkdir your-package
+	mkdir yourpackage
 	cp $(PACKAGE_BASE)/layout/$@ $@
 
 $(PACKAGE_FILES)::
@@ -168,3 +169,5 @@ $(ALL_TESTS) $(ALL_DEV_TESTS):
 clean::
 	find . -name '*.pyc' | xargs rm
 	rm -fr build dist MANIFEST *.egg-info
+
+purge:: clean

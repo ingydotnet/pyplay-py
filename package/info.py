@@ -1,7 +1,9 @@
 def get():
     info = {}
     info.update(
-{ 'classifiers': [ 'Development Status :: 3 - Alpha',
+{ 'author': 'Ingy dot Net',
+  'author_email': 'ingy@ingy.net',
+  'classifiers': [ 'Development Status :: 4 - Beta',
                    'Environment :: Console',
                    'Intended Audience :: Developers',
                    'License :: OSI Approved :: BSD License',
@@ -17,6 +19,6 @@ def get():
   'py_modules': ['pyplay'],
   'scripts': ['bin/pyplay'],
   'url': 'http://github.com/ingydotnet/pyplay-py/',
-  'version': '1.0.4'}
+  'version': '1.0.5'}
 )
     return info

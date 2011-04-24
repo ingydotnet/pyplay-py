@@ -1,6 +1,8 @@
-"""Welcome to pyplay. Type h() for help."""
+"""\
+Python Interactive Playground
+"""
 
-__version__ = '1.0.4'
+__version__ = '1.0.5'
 
 import os
 import sys

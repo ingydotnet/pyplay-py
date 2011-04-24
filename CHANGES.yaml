@@ -1,4 +1,9 @@
 ---
+- version: 1.0.5
+  date:    Sun Apr 24 12:15:59 EST 2011
+  changes:
+  - Fixed missing meta data issues
+---
 - version: 1.0.4
   date:    Sun Apr 24 11:25:59 EST 2011
   changes:

@@ -1,10 +1,9 @@
 name: pyplay
-
-version_from_module: pyplay
+include: ../package-py/my-info.yaml
 
 ## See: http://pypi.python.org/pypi?:action=list_classifiers
 classifiers:
-- 'Development Status :: 3 - Alpha'
+- 'Development Status :: 4 - Beta'
 - 'Environment :: Console'
 - 'Intended Audience :: Developers'
 - 'License :: OSI Approved :: BSD License'
@@ -15,10 +14,5 @@ classifiers:
 - 'Topic :: System :: Shells'
 - 'Topic :: Utilities'
 
-description: Python Interactive Playground
-long_description_from: README.rst
-url: http://github.com/ingydotnet/pyplay-py/
 py_modules:
 - pyplay
-scripts:
-- bin/pyplay

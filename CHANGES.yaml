@@ -1,4 +1,10 @@
 ---
+- version: 1.0.4
+  date:    Sun Apr 24 10:12:34 EST 2011
+  changes:
+  - Make it work on Ubuntu (and everywhere else I hope)
+  - Update help output
+---
 - version: 1.0.3
   date:    Thu Apr 22 09:55:36 PDT 2010
   changes:

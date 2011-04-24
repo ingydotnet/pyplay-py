@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-import os
-import sys
+import os, sys
+sys.path.insert(0, '.')
+import pyplay
 
-path = "./pyplay.py"
-if not os.path.exists(path):
-    from distutils.sysconfig import get_python_lib
-    path = get_python_lib() + "/pyplay.py"
-    if not os.path.exists(path):
-        raise Exception("Can't find pyplay.py")
+path = pyplay.__file__
+if path[-4:] == '.pyc':
+    path = path[0:-1]
+print path
 
 os.environ['PYTHONSTARTUP'] = path
 os.environ['_PYPLAY_ARGV'] = ' '.join(sys.argv[1:])

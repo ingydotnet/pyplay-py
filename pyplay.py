@@ -1,6 +1,6 @@
 """Welcome to pyplay. Type h() for help."""
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 import os
 import sys
@@ -61,7 +61,7 @@ class PyPlay():
         return """
 Welcome to PyPlay version %(version)s.
 
-PYPATH_CONFIG_DIR:  %(dir)s
+PYPLAY_CONFIG_DIR:  %(dir)s
 Config file:        %(config)s
 Commands:
     * h()           -- Help screen.
@@ -72,6 +72,8 @@ Tips and Tricks:
     * Use the tab key to complete a word or see what options are
       available in any given context.
     * Use <ctl>-L to clear the screen.
+
+Full documentation: http://pypi.python.org/pypi/pyplay/
 """ % locals()
 
     def main(self):

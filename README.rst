@@ -50,6 +50,7 @@ you can set up your own custom configuration in a file called
     - yaml
 
     # Commands to run by default
+    commands:
     - from yaml import *
 
 If you explicitly supply the ``PYPLAY_CONFIG_DIR`` environment variable,
